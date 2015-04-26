@@ -22,9 +22,6 @@
 run_analysis <- function(){
     library(dplyr)
     
-    # Download data
-    getdata()
-    
     # Transform the data
     avgPerSubjectActivity<-mergeData()
     
@@ -33,34 +30,19 @@ run_analysis <- function(){
                 ,row.names=FALSE)
 }
 
-# Download and Extract Raw data for project
-getdata <- function(){
-    url<-"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-    if (!file.exists("data")){
-        dir.create("data")
-    }
-    
-    download.file(url, "./data/uci_har_data.zip", "curl")
-    
-    dateDownloaded <- date()
-    
-    unzip("./data/uci_har_data.zip",exdir="./data")
-}
-
-
 # 1.Merges the training and the test sets to create one data set.
 mergeData <- function(){
     
 
     # _test dataset
-    subject_test_file <- "./data/UCI HAR Dataset/test/subject_test.txt"
-    X_test_file <- "./data/UCI HAR Dataset/test/X_test.txt"
-    Y_test_file <- "./data/UCI HAR Dataset/test/y_test.txt"
+    subject_test_file <- "./UCI HAR Dataset/test/subject_test.txt"
+    X_test_file <- "./UCI HAR Dataset/test/X_test.txt"
+    Y_test_file <- "./UCI HAR Dataset/test/y_test.txt"
     
     # _train dataset
-    subject_train_file <- "./data/UCI HAR Dataset/train/subject_train.txt"
-    X_train_file <- "./data/UCI HAR Dataset/train/X_train.txt"
-    Y_train_file <- "./data/UCI HAR Dataset/train/y_train.txt"
+    subject_train_file <- "./UCI HAR Dataset/train/subject_train.txt"
+    X_train_file <- "./UCI HAR Dataset/train/X_train.txt"
+    Y_train_file <- "./UCI HAR Dataset/train/y_train.txt"
     
     
     # Read in data
@@ -73,10 +55,10 @@ mergeData <- function(){
     Y_train<-read.table(Y_train_file, stringsAsFactors=FALSE,header=FALSE)
     
     # Read in feature names
-    featureNames <- read.table("./data/UCI HAR Dataset/features.txt", stringsAsFactors=FALSE,header=FALSE)
+    featureNames <- read.table("./UCI HAR Dataset/features.txt", stringsAsFactors=FALSE,header=FALSE)
     
     # Read in Activity Labels
-    activityLabels <- read.table("./data/UCI HAR Dataset/activity_labels.txt", stringsAsFactors=FALSE,header=FALSE)
+    activityLabels <- read.table("./UCI HAR Dataset/activity_labels.txt", stringsAsFactors=FALSE,header=FALSE)
     
     
     # _test dataset #
